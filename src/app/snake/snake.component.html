@@ -1,0 +1,35 @@
+
+<div (keydown)="onKey($event)" tabindex="1" style="position:relative;">
+  <svg 
+    [attr.width]="game.x_max*10+'px'" 
+    [attr.height]="game.y_max*10+'px'" 
+    xmlns="http://www.w3.org/2000/svg" 
+    version="1.1"
+    >
+    <rect 
+    x="0"
+    y="0" 
+    [attr.width]="game.x_max*10+'px'" 
+    [attr.height]="game.y_max*10+'px'" 
+    fill="#111">
+  </rect>
+    <ng-container *ngFor="let i of game.maps;let x = index" >
+      <ng-container *ngFor="let ii of i;let y = index" >
+        <rect 
+          *ngIf="ii" 
+          [attr.x]="x*10+'px'"
+          [attr.y]="y*10+'px'" 
+          width="10" 
+          height="10" 
+          [attr.fill]="'#'+ii.toString(16)">
+        </rect>
+      </ng-container>
+    </ng-container>
+  </svg>
+
+  <div style="position:absolute;top:0;left:0;color: aliceblue;">
+    <div *ngIf="game.gameStatus=='stop'">Press the spacebar to start</div>
+    <div *ngIf="game.gameStatus=='gameover'">game over {{game.getPoint()}}pt</div>
+  </div>
+
+</div>
